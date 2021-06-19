@@ -1,13 +1,14 @@
 #include <stdlib.h>
 #include <time.h>
-
 #include <stdio.h>
+
 /**
- *main - positive or negative number
+ *main -print if the number is positive or negative number
  *
+ *Description: using the main function
+ *this program prints "programming is positive, zero, or negative"
  *Return: 0 on success
  */
-
 int main(void)
 {
 	int n;
@@ -17,14 +18,15 @@ int main(void)
 	/* your code goes there */
 	if (n > 0)
 	{
-		printf("%d", "n is a positive number\n");
+		printf("%i is a positive number\n", n);
+	}
+	else if (n == 0)
+	{
+		printf("%i is zero\n", n);
 	}
 	else if (n < 0)
 	{
-		printf("%d", "n is a negative number\n");
+		printf("%i is a negative number\n", n);
 	}
-	else
-	{
-		printf("%d", "n is zero\n"
 		return (0);
 }
