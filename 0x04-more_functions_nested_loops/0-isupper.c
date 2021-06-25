@@ -1,4 +1,5 @@
 #include "holberton.h"
+
 /**
  * _isupper - function that checks for uppercase character
  * @c: based integer ascii values
