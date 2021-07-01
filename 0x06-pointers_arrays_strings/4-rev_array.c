@@ -1,0 +1,26 @@
+#include "holberton.h"
+
+/**
+ *reverse_array - function that reverses the content of an array of element
+ *@a: declaration of a and parameters for arguement
+ *@n: declaration of n and parameters
+ *Return: always 0
+ */
+void reverse_array(int *a, int n)
+{
+	int *first = a;
+	int *last = a + n - 1;
+
+	while (first < last)
+	{
+		int temp = *first;
+		*first = *last;
+		*last = temp;
+		first++;
+		last--;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		a++;
+	}
+}
