@@ -1,30 +1,38 @@
 #include "holberton.h"
-/**
- * _strncpy - check the code for Holberton School students.
- * @src: parameter to a src to copy
- * @dest: parameter for dest
- * @n: parameter for number of bytes
- * Return: Always 0.
- */
 
+/**
+ * _strncpy - copies a string.
+ * @dest: destination string.
+ * @src: source string.
+ * @n: number of bytes of src to use.
+ *
+ * Return: pointer to resulting string dest
+ */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int a = 0;
-	int b = 0;
+	int dest_idx = 0, src_idx = 0, i, src_size;
 
-	while (a != n)
+/*find length of dest string*/
+	while (*(dest + dest_idx) != '\0')
 	{
-		dest[b] = src[a];
-		b++;
-		a++;
-		if (src[a] == '\0')
-		{
-			break;
-		}
+		dest_idx++;
 	}
-	while (b != n)
+
+/*find length of src string*/
+	while (*(src + src_idx) != '\0')
 	{
-		dest[b++] = '\0';
-		return (dest);
+		src_idx++;
 	}
+	src_size = src_idx + 1;
+
+	if (n > src_size)
+	{
+		n = src_size;
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		*(dest + i) = *(src + i);
+	}
+	return (dest);
 }
