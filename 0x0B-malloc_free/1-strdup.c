@@ -11,7 +11,8 @@ char *_strdup(char *str)
 	int i, len;
 
 	my_array = malloc(sizeof(str));
-
+	if (str == NULL)
+		return (NULL);
 	i = len = 0;
 	while (str[i] != '\0')
 	{
