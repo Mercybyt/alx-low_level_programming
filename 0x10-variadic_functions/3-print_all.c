@@ -1,48 +1,101 @@
-#include "variadic_functions.h"
 #include <stdarg.h>
 #include <stdio.h>
+#include "variadic_functions.h"
+
 /**
- *print_all - print anything
- *@...: Unlimited args
- *@format: string format
- *Return: void
+ * print_char - function that prints character
+ * @valist: argument list pointer to character to be printed
  */
-void print_all(const char * const format, ...)
+
+void print_char(va_list valist)
 {
-	const char *s;
-	va_list args;
-	int c, i;
-	float f;
+	char character;
+
+	character = va_arg(valist, int);
+	printf("%c", character);
+}
+
+/**
+ * print_int - function that prints integer
+ * @valist: argument list pointer to integer to be printed
+ */
+
+void print_int(va_list valist)
+{
+	int num_i;
+
+	num_i = va_arg(valist, int);
+	printf("%i", num_i);
+}
+
+/**
+ * print_float - function that prints a float
+ * @valist: argument list pointer to float to be printed
+ */
+
+void print_float(va_list valist)
+{
+	float num_f;
+
+	num_f = va_arg(valist, double);
+	printf("%f", num_f);
+}
+
+/**
+ * print_string - function that prints string
+ * @valist: argument list pointer to string to be printed
+ */
+
+void print_string(va_list valist)
+{
 	char *str;
 
-	s = format;
-	va_start(args, format);
-	while (s && *s != '\0')
+	str = va_arg(valist, char*);
+
+	if (str == NULL)
 	{
-		switch (*s)
-		{
-		case 'c':
-			c = va_arg(args, int);
-			printf("%c", c);
-			break;
-		case 'i':
-			i = va_arg(args, int);
-			printf("%d", i);
-			break;
-		case 'f':
-			f = va_arg(args, double);
-			printf("%f", f);
-		case 's':
-			str = va_arg(args, char *);
-			(str_helper)str;
-			break;
-		default:
-			break;
-		}
-		s++;
-		if (s && *s != '\0' && (*s == 'c' || *s == 'i' || *s == 'f' || *s == 's'))
-			printf(",");
+		printf("(nil)");
+		return;
 	}
-	printf('\n');
-	va_end(args);
+	printf("%s", str);
+}
+
+/**
+ * print_all - function that prints anything
+ * @format: list of types of arguments passed to the function
+ * @...: number of arguments
+ * Return: none
+ */
+
+void print_all(const char * const format, ...)
+{
+	va_list arguments;
+	int nIndex, arg_len;
+	char *separator = "";
+
+	prints_all fmt_list[] = {
+		("c", print_char),
+		("i", print_int),
+		("f", print_float),
+		("s", print_string)
+	};
+	va_start(arguments, format);
+	nIndex = 0;
+	while (format && (*(format + nIndex)))
+	{
+		arg_len = 0;
+		while (arg_len < 4 && (*(format + nIndex) != *(fmt_list[arg_len].index)))
+		{
+			arg_len++;
+		}
+		if (arg_len < 4)
+		{
+			printf("%s", separator);
+			fmt_list[arg_len].func(arguments);
+			separator = ", ";
+		}
+		nIndex++;
+	}
+	printf("\n");
+	va_end(arguments);
 }

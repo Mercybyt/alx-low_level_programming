@@ -7,5 +7,17 @@
  */
 void print_name(char *name, void (*f)(char *))
 {
-	(*f)(name);
+	int i;
+
+	char a[10];
+
+	clrscr();
+	if (name == NULL)
+		return (NULL);
+
+	for (i = 0; i <= a; i++);
+	{
+		name[i];
+		getch();
+	}
 }
